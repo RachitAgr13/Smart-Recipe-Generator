@@ -1,0 +1,606 @@
+[
+  {
+    "id": 1,
+    "name": "Veggie Stir-Fry",
+    "ingredients": [
+      "2 cups broccoli florets",
+      "1 red bell pepper, sliced",
+      "1 carrot, sliced",
+      "2 tbsp soy sauce",
+      "1 tbsp olive oil",
+      "1 clove garlic, minced"
+    ],
+    "steps": [
+      "Chop vegetables.",
+      "Heat oil in a pan.",
+      "Add garlic and vegetables, stir-fry 5\u20137 min.",
+      "Add soy sauce and cook 1\u20132 min."
+    ],
+    "difficulty": "Easy",
+    "cookTime": "15 min",
+    "dietary": [
+      "Vegetarian",
+      "Vegan"
+    ],
+    "nutrition": {
+      "calories": 220,
+      "protein": "6g",
+      "carbs": "22g",
+      "fat": "10g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 2,
+    "name": "Quinoa Salad",
+    "ingredients": [
+      "1 cup cooked quinoa",
+      "1/2 cucumber, diced",
+      "10 cherry tomatoes, halved",
+      "2 tbsp olive oil",
+      "1 tbsp lemon juice",
+      "salt & pepper"
+    ],
+    "steps": [
+      "Cook quinoa, cool.",
+      "Chop vegetables.",
+      "Mix everything and chill 10 min."
+    ],
+    "difficulty": "Easy",
+    "cookTime": "20 min",
+    "dietary": [
+      "Vegetarian",
+      "Gluten-Free"
+    ],
+    "nutrition": {
+      "calories": 300,
+      "protein": "8g",
+      "carbs": "35g",
+      "fat": "12g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 3,
+    "name": "Pancakes",
+    "ingredients": [
+      "1 cup all-purpose flour",
+      "1 tbsp sugar",
+      "1 tsp baking powder",
+      "1 egg",
+      "1 cup milk",
+      "1 tbsp butter, melted"
+    ],
+    "steps": [
+      "Mix dry ingredients.",
+      "Whisk wet ingredients.",
+      "Combine and cook on greased skillet until golden."
+    ],
+    "difficulty": "Easy",
+    "cookTime": "25 min",
+    "dietary": [
+      "Vegetarian"
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "9g",
+      "carbs": "50g",
+      "fat": "12g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 4,
+    "name": "Tomato Basil Pasta",
+    "ingredients": [
+      "200g spaghetti",
+      "2 ripe tomatoes, chopped",
+      "2 cloves garlic",
+      "handful fresh basil",
+      "2 tbsp olive oil",
+      "salt"
+    ],
+    "steps": [
+      "Boil pasta until al dente.",
+      "Saut\u00e9 garlic, add tomatoes and basil.",
+      "Toss pasta with sauce."
+    ],
+    "difficulty": "Easy",
+    "cookTime": "20 min",
+    "dietary": [
+      "Vegetarian"
+    ],
+    "nutrition": {
+      "calories": 420,
+      "protein": "12g",
+      "carbs": "62g",
+      "fat": "14g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 5,
+    "name": "Chickpea Curry",
+    "ingredients": [
+      "1 can chickpeas",
+      "1 onion, chopped",
+      "2 tomatoes, pureed",
+      "1 tsp curry powder",
+      "1 tbsp oil",
+      "salt"
+    ],
+    "steps": [
+      "Saut\u00e9 onion, add spices.",
+      "Add tomato puree and chickpeas.",
+      "Simmer 10\u201315 min."
+    ],
+    "difficulty": "Medium",
+    "cookTime": "30 min",
+    "dietary": [
+      "Vegetarian",
+      "Vegan",
+      "Gluten-Free"
+    ],
+    "nutrition": {
+      "calories": 380,
+      "protein": "14g",
+      "carbs": "48g",
+      "fat": "12g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 6,
+    "name": "Grilled Chicken Salad",
+    "ingredients": [
+      "200g chicken breast",
+      "mixed lettuce",
+      "1/2 cucumber",
+      "1 tomato",
+      "2 tbsp vinaigrette"
+    ],
+    "steps": [
+      "Grill chicken, slice.",
+      "Toss vegetables with dressing.",
+      "Top with sliced chicken."
+    ],
+    "difficulty": "Easy",
+    "cookTime": "25 min",
+    "dietary": [],
+    "nutrition": {
+      "calories": 320,
+      "protein": "28g",
+      "carbs": "10g",
+      "fat": "14g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 7,
+    "name": "Omelette",
+    "ingredients": [
+      "2 eggs",
+      "1 tbsp milk",
+      "salt & pepper",
+      "1 tsp butter",
+      "optional veggies"
+    ],
+    "steps": [
+      "Beat eggs with milk and seasoning.",
+      "Cook in buttered pan, add fillings, fold and serve."
+    ],
+    "difficulty": "Easy",
+    "cookTime": "10 min",
+    "dietary": [
+      "Vegetarian"
+    ],
+    "nutrition": {
+      "calories": 220,
+      "protein": "12g",
+      "carbs": "2g",
+      "fat": "16g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 8,
+    "name": "Lentil Soup",
+    "ingredients": [
+      "1 cup red lentils",
+      "1 onion, chopped",
+      "1 carrot, diced",
+      "1 celery stalk, diced",
+      "1 tsp cumin",
+      "4 cups water",
+      "salt"
+    ],
+    "steps": [
+      "Saut\u00e9 onion, carrot, celery.",
+      "Add lentils and water, simmer 20\u201325 min.",
+      "Blend partially if desired."
+    ],
+    "difficulty": "Easy",
+    "cookTime": "30 min",
+    "dietary": [
+      "Vegetarian",
+      "Vegan",
+      "Gluten-Free"
+    ],
+    "nutrition": {
+      "calories": 260,
+      "protein": "14g",
+      "carbs": "38g",
+      "fat": "3g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 9,
+    "name": "Veggie Tacos",
+    "ingredients": [
+      "8 small tortillas",
+      "1 cup black beans cooked",
+      "1 cup corn",
+      "lettuce",
+      "salsa",
+      "1 avocado, sliced"
+    ],
+    "steps": [
+      "Warm tortillas.",
+      "Assemble with beans, veggies and salsa.",
+      "Top with avocado."
+    ],
+    "difficulty": "Easy",
+    "cookTime": "15 min",
+    "dietary": [
+      "Vegetarian"
+    ],
+    "nutrition": {
+      "calories": 400,
+      "protein": "12g",
+      "carbs": "55g",
+      "fat": "14g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 10,
+    "name": "Baked Salmon",
+    "ingredients": [
+      "2 salmon fillets",
+      "1 lemon",
+      "salt & pepper",
+      "1 tbsp olive oil"
+    ],
+    "steps": [
+      "Season salmon, bake at 200\u00b0C for 12\u201315 min.",
+      "Serve with lemon wedges."
+    ],
+    "difficulty": "Easy",
+    "cookTime": "20 min",
+    "dietary": [
+      "Gluten-Free"
+    ],
+    "nutrition": {
+      "calories": 450,
+      "protein": "30g",
+      "carbs": "0g",
+      "fat": "28g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 11,
+    "name": "Tofu Stir-Fry",
+    "ingredients": [
+      "200g firm tofu",
+      "mixed vegetables",
+      "2 tbsp soy sauce",
+      "1 tbsp oil",
+      "garlic"
+    ],
+    "steps": [
+      "Press and cube tofu.",
+      "Sear tofu until crisp.",
+      "Stir-fry vegetables, add tofu and sauce."
+    ],
+    "difficulty": "Easy",
+    "cookTime": "20 min",
+    "dietary": [
+      "Vegetarian",
+      "Vegan"
+    ],
+    "nutrition": {
+      "calories": 300,
+      "protein": "18g",
+      "carbs": "20g",
+      "fat": "14g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 12,
+    "name": "Beef Fried Rice",
+    "ingredients": [
+      "2 cups cooked rice",
+      "100g beef strips",
+      "2 tbsp soy sauce",
+      "1 egg",
+      "1/2 cup peas",
+      "1 carrot diced"
+    ],
+    "steps": [
+      "Scramble egg, set aside.",
+      "Sear beef, add veggies.",
+      "Add rice and soy, toss with egg."
+    ],
+    "difficulty": "Medium",
+    "cookTime": "25 min",
+    "dietary": [],
+    "nutrition": {
+      "calories": 520,
+      "protein": "22g",
+      "carbs": "60g",
+      "fat": "18g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 13,
+    "name": "Greek Salad",
+    "ingredients": [
+      "1 cucumber",
+      "2 tomatoes",
+      "1/4 red onion",
+      "olives",
+      "50g feta",
+      "2 tbsp olive oil",
+      "oregano"
+    ],
+    "steps": [
+      "Chop ingredients.",
+      "Toss with olive oil and oregano."
+    ],
+    "difficulty": "Easy",
+    "cookTime": "10 min",
+    "dietary": [
+      "Vegetarian",
+      "Gluten-Free"
+    ],
+    "nutrition": {
+      "calories": 280,
+      "protein": "8g",
+      "carbs": "10g",
+      "fat": "22g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 14,
+    "name": "Mushroom Risotto",
+    "ingredients": [
+      "1 cup arborio rice",
+      "200g mushrooms, sliced",
+      "1 onion",
+      "3 cups stock",
+      "parmesan",
+      "butter"
+    ],
+    "steps": [
+      "Saut\u00e9 onion and mushrooms.",
+      "Add rice and stir.",
+      "Add stock gradually until creamy.",
+      "Finish with parmesan."
+    ],
+    "difficulty": "Medium",
+    "cookTime": "40 min",
+    "dietary": [
+      "Vegetarian"
+    ],
+    "nutrition": {
+      "calories": 520,
+      "protein": "14g",
+      "carbs": "72g",
+      "fat": "18g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 15,
+    "name": "Shakshuka",
+    "ingredients": [
+      "2 eggs",
+      "1 can crushed tomatoes",
+      "1 onion",
+      "1 clove garlic",
+      "1 tsp paprika",
+      "olive oil"
+    ],
+    "steps": [
+      "Saut\u00e9 onion and garlic.",
+      "Add tomatoes and spices.",
+      "Crack eggs into sauce and cook until set."
+    ],
+    "difficulty": "Easy",
+    "cookTime": "25 min",
+    "dietary": [
+      "Vegetarian",
+      "Gluten-Free"
+    ],
+    "nutrition": {
+      "calories": 320,
+      "protein": "16g",
+      "carbs": "18g",
+      "fat": "18g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 16,
+    "name": "Veg Pulao",
+    "ingredients": [
+      "1 cup basmati rice",
+      "mixed vegetables",
+      "whole spices",
+      "2 cups water",
+      "ghee",
+      "salt"
+    ],
+    "steps": [
+      "Rinse rice.",
+      "Saut\u00e9 spices and veg.",
+      "Add rice and water, cook covered until done."
+    ],
+    "difficulty": "Easy",
+    "cookTime": "30 min",
+    "dietary": [
+      "Vegetarian",
+      "Gluten-Free"
+    ],
+    "nutrition": {
+      "calories": 410,
+      "protein": "8g",
+      "carbs": "75g",
+      "fat": "8g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 17,
+    "name": "Chana Masala",
+    "ingredients": [
+      "1 can chickpeas",
+      "1 onion",
+      "2 tomatoes",
+      "1 tsp garam masala",
+      "ginger",
+      "garlic"
+    ],
+    "steps": [
+      "Make masala base with onion and spices.",
+      "Add tomatoes and chickpeas, simmer 15 min."
+    ],
+    "difficulty": "Medium",
+    "cookTime": "35 min",
+    "dietary": [
+      "Vegetarian",
+      "Vegan",
+      "Gluten-Free"
+    ],
+    "nutrition": {
+      "calories": 380,
+      "protein": "15g",
+      "carbs": "50g",
+      "fat": "10g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 18,
+    "name": "Palak Paneer",
+    "ingredients": [
+      "200g paneer",
+      "spinach puree",
+      "1 onion",
+      "garlic",
+      "spices",
+      "2 tbsp cream"
+    ],
+    "steps": [
+      "Cook spinach sauce, add spices.",
+      "Add paneer and simmer, finish with cream."
+    ],
+    "difficulty": "Medium",
+    "cookTime": "35 min",
+    "dietary": [
+      "Vegetarian",
+      "Gluten-Free"
+    ],
+    "nutrition": {
+      "calories": 520,
+      "protein": "22g",
+      "carbs": "20g",
+      "fat": "36g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 19,
+    "name": "Aloo Paratha",
+    "ingredients": [
+      "2 cups wheat flour",
+      "2 potatoes boiled and mashed",
+      "spices",
+      "ghee"
+    ],
+    "steps": [
+      "Make dough, prepare potato filling.",
+      "Roll parathas and cook on tawa with ghee."
+    ],
+    "difficulty": "Medium",
+    "cookTime": "45 min",
+    "dietary": [
+      "Vegetarian"
+    ],
+    "nutrition": {
+      "calories": 600,
+      "protein": "12g",
+      "carbs": "90g",
+      "fat": "18g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 20,
+    "name": "Masala Oats",
+    "ingredients": [
+      "1/2 cup oats",
+      "mixed veg",
+      "spices",
+      "water",
+      "salt"
+    ],
+    "steps": [
+      "Toast oats, add veg and water, cook until creamy."
+    ],
+    "difficulty": "Easy",
+    "cookTime": "12 min",
+    "dietary": [
+      "Vegetarian"
+    ],
+    "nutrition": {
+      "calories": 280,
+      "protein": "8g",
+      "carbs": "40g",
+      "fat": "8g"
+    },
+    "servings": 2
+  },
+  {
+    "id": 21,
+    "name": "Fruit Yogurt Parfait",
+    "ingredients": [
+      "1 cup yogurt",
+      "mixed fruits",
+      "1/4 cup granola",
+      "honey"
+    ],
+    "steps": [
+      "Layer yogurt, fruits and granola.",
+      "Drizzle honey and serve."
+    ],
+    "difficulty": "Easy",
+    "cookTime": "5 min",
+    "dietary": [
+      "Vegetarian",
+      "Gluten-Free"
+    ],
+    "nutrition": {
+      "calories": 320,
+      "protein": "12g",
+      "carbs": "40g",
+      "fat": "10g"
+    },
+    "servings": 2
+  }
+]

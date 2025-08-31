@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const ORIGIN = process.env.ALLOWED_ORIGIN || "https://smart-recipe-generator-mauve.vercel.app/";
+const ORIGIN = process.env.ALLOWED_ORIGIN || "https://smart-recipe-generator-mauve.vercel.app";
 
 // --- CORS setup ---
 app.use(

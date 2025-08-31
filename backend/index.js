@@ -58,7 +58,7 @@ app.post("/api/upload-image", upload.single("image"), async (req, res) => {
 app.use("/api", recipesRouter);
 
 // --- Start server ---
-app.listen(PORT, () => {
-  console.log(`✅ Backend running on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ Backend running on http://0.0.0.0:${PORT}`);
   console.log(`🌐 Allowed origin: ${ORIGIN}`);
 });

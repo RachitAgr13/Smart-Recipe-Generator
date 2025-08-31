@@ -159,7 +159,7 @@ export default function App() {
       <div className="max-w-6xl mx-auto p-4 sm:p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800 mt-8 mb-8 transition-colors duration-300">
         <header className="mb-8 border-b pb-4 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-800 dark:text-gray-100 tracking-tight mb-1">Smart Recipe Generator</h1>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-800 dark:text-gray-100 tracking-tight mb-1 drop-shadow-sm">Smart Recipe Generator</h1>
             <p className="text-gray-500 dark:text-gray-300 text-lg">Enter ingredients, upload images, and let AI suggest recipes.</p>
           </div>
           <button
@@ -193,17 +193,20 @@ export default function App() {
         <div className="flex gap-3 mb-8 items-center">
           <button
             onClick={askAI}
-            className="px-6 py-2 rounded-lg bg-black text-white hover:bg-gray-800 transition font-semibold shadow"
+            className={`px-6 py-2 rounded-lg bg-black text-white hover:bg-gray-800 transition font-semibold shadow ${loading ? 'animate-pulse' : ''}`}
           >
-            Generate Recipes
+            {loading ? '🔄 Generating...' : 'Generate Recipes'}
           </button>
           {loading && <div className="spinner" />}
           {error && <div className="text-red-600 text-base">{error}</div>}
         </div>
 
         {toast && (
-          <div className="fixed bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg">
-            {toast}
+          <div className="fixed bottom-4 right-4 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-4 rounded-xl shadow-2xl border border-green-400 transform transition-all duration-300 z-50">
+            <div className="flex items-center space-x-3">
+              <span className="text-2xl">✅</span>
+              <span className="font-semibold">{toast}</span>
+            </div>
           </div>
         )}
 
@@ -253,24 +256,38 @@ export default function App() {
             <h2 className="text-2xl font-semibold text-gray-800">Local Recipes</h2>
             <span className="text-sm text-gray-500">{filteredLocal.length} items</span>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredLocal.map((r) => (
-              <RecipeCard
-                key={r.id}
-                recipe={{
-                  ...r,
-                  title: r.name,
-                  cookTimeMinutes:
-                    parseInt(String(r.cookTime).replace(/[^0-9]/g, '') ) || 0
-                }}
-                servings={servings}
-                onToggleFav={() => toggleFav(r)}
-                isFav={favorites.some((f) => f.name === r.name)}
-                rating={ratings[r.name] || 0}
-                onRate={(n) => rate(r.name, n)}
-              />
-            ))}
-          </div>
+          {filteredLocal.length === 0 ? (
+            <div className="text-center py-12 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-300">
+              <div className="text-6xl mb-4">🍽️</div>
+              <h3 className="text-xl font-semibold text-gray-700 mb-2">No recipes found</h3>
+              <p className="text-gray-500 mb-4">Try adjusting your filters or adding some ingredients to generate new recipes!</p>
+              <button 
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+              >
+                Add Ingredients
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredLocal.map((r) => (
+                <RecipeCard
+                  key={r.id}
+                  recipe={{
+                    ...r,
+                    title: r.name,
+                    cookTimeMinutes:
+                      parseInt(String(r.cookTime).replace(/[^0-9]/g, '') ) || 0
+                  }}
+                  servings={servings}
+                  onToggleFav={() => toggleFav(r)}
+                  isFav={favorites.some((f) => f.name === r.name)}
+                  rating={ratings[r.name] || 0}
+                  onRate={(n) => rate(r.name, n)}
+                />
+              ))}
+            </div>
+          )}
         </section>
 
         <FavoritesPanel favorites={favorites} onClear={() => setFavorites([])} />

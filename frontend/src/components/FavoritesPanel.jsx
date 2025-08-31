@@ -3,7 +3,17 @@ import React, { useState } from "react";
 export default function FavoritesPanel({ favorites = [], onClear }) {
   const [expanded, setExpanded] = useState({});
 
-  if (!favorites.length) return null;
+  if (!favorites.length) {
+    return (
+      <div className="bg-gray-50 p-6 rounded-2xl shadow-lg mt-8">
+        <div className="text-center py-8">
+          <div className="text-6xl mb-4">❤️</div>
+          <h2 className="text-xl font-semibold text-gray-700 mb-2">No favorites yet</h2>
+          <p className="text-gray-500">Start adding recipes to your favorites to see them here!</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-gray-50 p-6 rounded-2xl shadow-lg mt-8">

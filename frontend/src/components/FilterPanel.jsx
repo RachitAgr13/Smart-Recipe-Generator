@@ -9,34 +9,38 @@ export default function FilterPanel({ onFilter = () => {} }) {
   };
 
   return (
-    <div className="p-5 border rounded-2xl bg-gray-50 shadow-lg flex flex-col gap-2">
-      <h3 className="font-extrabold mb-2 text-lg text-gray-800">Filter Recipes</h3>
-      <label className="block text-sm mb-1">Difficulty</label>
+    <div className="p-6 border-2 border-gray-200 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:border-purple-300 focus-within:border-purple-400 focus-within:shadow-2xl">
+      <h3 className="font-extrabold text-xl mb-4 text-gray-800 flex items-center">
+        <span className="mr-2">🔍</span>
+        Filter Recipes
+      </h3>
+      <label className="block text-sm font-semibold mb-2 text-gray-700">Difficulty</label>
       <select
         value={difficulty}
         onChange={(e) => setDifficulty(e.target.value)}
-        className="w-full border rounded px-2 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
+        className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 mb-4 focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-purple-400 transition-all duration-200 text-gray-700"
       >
-        <option value="">Any</option>
+        <option value="">Any Difficulty</option>
         <option value="Easy">Easy</option>
         <option value="Medium">Medium</option>
         <option value="Hard">Hard</option>
       </select>
 
-      <label className="block text-sm mb-1">Max Time (minutes)</label>
+      <label className="block text-sm font-semibold mb-2 text-gray-700">Max Time (minutes)</label>
       <input
         type="number"
         min="0"
         value={maxTime}
         onChange={(e) => setMaxTime(e.target.value)}
-        className="w-full border rounded px-2 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
+        className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 mb-4 focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-purple-400 transition-all duration-200 text-gray-700"
+        placeholder="Enter max time"
       />
 
       <button
         onClick={apply}
-        className="px-6 py-2 bg-blue-600 text-white rounded-lg font-bold shadow hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-300"
+        className="w-full px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg font-bold shadow-lg hover:from-purple-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-300"
       >
-        Apply
+        Apply Filters
       </button>
     </div>
   );

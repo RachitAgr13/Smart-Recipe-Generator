@@ -138,11 +138,14 @@ router.post("/filter", async (req, res) => {
       );
     }
     if (dietary && dietary.length > 0) {
-      recipes = recipes.filter(r =>
-        Array.isArray(r.dietary) && dietary.every(d =>
-          r.dietary.map(x => x.toLowerCase()).includes(d.toLowerCase())
-        )
-      );
+      recipes = recipes.filter(r => {
+        if (!Array.isArray(r.dietary)) return false;
+        const recipeDietary = r.dietary.map(x => String(x).toLowerCase());
+        return dietary.some(d => 
+          recipeDietary.includes(String(d).toLowerCase()) ||
+          recipeDietary.some(rd => rd.includes(String(d).toLowerCase()))
+        );
+      });
     }
     if (maxTime) {
       recipes = recipes.filter(r => {
@@ -168,12 +171,14 @@ router.post("/filter", async (req, res) => {
 async function handleGenerate(req, res) {
   console.log("🔥 Hit generate with body:", req.body);
   try {
-    const { ingredients, dietary } = req.body;
+    const { ingredients, dietary, difficulty, maxTime } = req.body;
     if (!ingredients || ingredients.length === 0) {
       return res.status(400).json({ error: "No ingredients provided" });
     }
 
     const dietaryText = dietary ? `\nDietary preferences: ${dietary}` : "";
+    const difficultyText = difficulty ? `\nDifficulty level: ${difficulty}` : "";
+    const timeText = maxTime ? `\nMaximum cooking time: ${maxTime} minutes` : "";
 
     const prompt = `
 You are a JSON API that generates diverse cooking recipes.
@@ -200,7 +205,11 @@ Generate exactly 3 different recipes using these inputs:
 - One MAIN course
 - One HEALTHY option (low calorie, nutrient-rich)
 
-Ingredients to include: ${ingredients.join(", ")}${dietaryText}
+Ingredients to include: ${ingredients.join(", ")}${dietaryText}${difficultyText}${timeText}
+
+IMPORTANT: 
+${difficulty ? `- All recipes must be ${difficulty} difficulty level` : ""}
+${maxTime ? `- All recipes must take no more than ${maxTime} minutes to cook` : ""}
 `;
 
     const text = await geminiGenerateText(prompt);
@@ -246,12 +255,21 @@ router.post("/generate-recipes", handleGenerate);
 // --- Ingredient Detection from Image ---
 router.post("/detect-ingredient", upload.single("image"), async (req, res) => {
   try {
-    if (!req.file) return res.status(400).json({ error: "No image uploaded" });
-    if (!genAI) return res.status(500).json({ error: "Gemini not initialized" });
+    console.log("🔥 Image detection request received");
+    if (!req.file) {
+      console.log("❌ No file in request");
+      return res.status(400).json({ error: "No image uploaded" });
+    }
+    if (!genAI) {
+      console.log("❌ Gemini not initialized");
+      return res.status(500).json({ error: "Gemini not initialized. Check GEMINI_API_KEY in .env file" });
+    }
 
+    console.log("📁 Reading uploaded file:", req.file.path);
     const imgBuffer = await fs.readFile(req.file.path);
     const base64 = imgBuffer.toString("base64");
     const mimeType = req.file.mimetype || "image/jpeg";
+    console.log("📷 Image processed, size:", imgBuffer.length, "bytes");
 
     const detectPrompt = `Identify the single main ingredient in this food photo.
 Respond ONLY with a JSON object: { "ingredient": "name" }.`;

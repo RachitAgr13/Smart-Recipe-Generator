@@ -12,10 +12,12 @@ export default function App() {
   const [ingredients, setIngredients] = useState([])
   const [preferences, setPreferences] = useState({})
   const [servings, setServings] = useState(2)
+  const [currentFilters, setCurrentFilters] = useState({})
   const [localRecipes, setLocalRecipes] = useState([])
   const [filteredLocal, setFilteredLocal] = useState([])
   const [aiRecipes, setAiRecipes] = useState([])
   const [detectedRecipes, setDetectedRecipes] = useState([]) // 🔹 NEW
+  const [detectedIngredientName, setDetectedIngredientName] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [toast, setToast] = useState('')
@@ -77,7 +79,14 @@ export default function App() {
 
   const doFilter = async (params) => {
     try {
-      const data = await filterRecipes(params)
+      // Store current filters for AI generation
+      setCurrentFilters(params)
+      // Combine filter params with preferences
+      const filterParams = {
+        ...params,
+        dietary: preferences.diet ? [preferences.diet] : undefined
+      }
+      const data = await filterRecipes(filterParams)
       setFilteredLocal(data)
     } catch (e) {
       console.error(e)
@@ -93,7 +102,14 @@ export default function App() {
     setLoading(true)
     setError('')
     try {
-      const res = await generateRecipes(ingredients, preferences)
+      // Combine preferences and current filters for AI generation
+      const generationParams = {
+        ingredients,
+        dietary: preferences.diet,
+        difficulty: currentFilters.difficulty,
+        maxTime: currentFilters.maxTime
+      }
+      const res = await generateRecipes(generationParams)
       if (res.generated && res.generated.length > 0) {
         setAiRecipes(
           res.generated.map((r, i) => ({
@@ -116,6 +132,7 @@ export default function App() {
   // === Handle AI recipes from image upload ===
   const handleDetectedIngredient = (ingredient, recipes) => {
     console.log('🔥 Detected ingredient:', ingredient, recipes)
+    setDetectedIngredientName(ingredient)
     setDetectedRecipes(
       recipes.map((r, i) => ({
         ...r,
@@ -179,7 +196,7 @@ export default function App() {
             servings={servings}
             setServings={setServings}
           />
-          <FilterPanel onFilter={doFilter} />
+          <FilterPanel onFilter={doFilter} preferences={preferences} />
         </div>
 
         <IngredientImageUpload onDetected={handleDetectedIngredient} />
@@ -233,7 +250,14 @@ export default function App() {
         {/* === AI Recipes (from image detection) === */}
         {detectedRecipes.length > 0 && (
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold mb-4 text-gray-800">AI Recipes from Image</h2>
+            <div className="mb-4 p-4 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-xl border border-green-200 dark:border-green-700">
+              <div className="flex items-center text-green-700 dark:text-green-300">
+                <span className="mr-2 text-xl">🎯</span>
+                <span className="font-bold">Detected Ingredient: </span>
+                <span className="font-extrabold text-lg ml-1 text-green-800 dark:text-green-200">{detectedIngredientName}</span>
+              </div>
+            </div>
+            <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-100">Recipes for {detectedIngredientName}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {detectedRecipes.map((r, i) => (
                 <RecipeCard

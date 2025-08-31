@@ -72,7 +72,7 @@ export default function RecipeCard({ recipe, servings, onToggleFav, isFav, ratin
 
       <div className="text-xs text-green-700 mb-3 font-semibold">
         <b>Nutrition:</b>
-        {` ${recipe.nutrition.calories || "?"} cal, ${recipe.nutrition.protein || "?"} protein, ${recipe.nutrition.carbs || "?"} carbs, ${recipe.nutrition.fat || "?"} fat`}
+        {` ${recipe.nutrition?.calories || "?"} cal, ${recipe.nutrition?.protein || "?"} protein, ${recipe.nutrition?.carbs || "?"} carbs, ${recipe.nutrition?.fat || "?"} fat`}
       </div>
 
       <div className="text-sm mb-3">

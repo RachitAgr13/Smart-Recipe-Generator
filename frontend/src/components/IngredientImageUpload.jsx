@@ -6,10 +6,12 @@ export default function IngredientImageUpload({ onDetected }) {
   const [file, setFile] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [detectedIngredient, setDetectedIngredient] = useState('')
 
   const handleChange = (e) => {
     setFile(e.target.files[0])
     setError('')
+    setDetectedIngredient('') // Reset detected ingredient when new file selected
   }
 
   const handleDetect = async () => {
@@ -20,19 +22,24 @@ export default function IngredientImageUpload({ onDetected }) {
   setLoading(true)
   setError('')
   try {
+    console.log("📤 Uploading image:", file.name, file.size, "bytes")
     const formData = new FormData()
     formData.append('image', file)
 
     const res = await detectIngredient(formData)
-    console.log("🔥 Backend detect result:", res)   // 👈 add this line
+    console.log("🔥 Backend detect result:", res)
 
     if (res && res.ingredient) {
+      console.log("✅ Ingredient detected:", res.ingredient)
+      console.log("🍽️ Recipes found:", res.recipes?.length || 0)
+      setDetectedIngredient(res.ingredient)
       onDetected(res.ingredient, res.recipes || [])
     } else {
-      setError('No ingredient detected.')
+      setError('No ingredient detected. Try a clearer image of a single ingredient.')
     }
   } catch (err) {
-    setError(err.message || 'Detection failed.')
+    console.error("❌ Image detection error:", err)
+    setError(`Detection failed: ${err.message}`)
   } finally {
     setLoading(false)
   }
@@ -61,6 +68,12 @@ export default function IngredientImageUpload({ onDetected }) {
         {loading ? '🔍 Detecting...' : '🔍 Detect Ingredient'}
       </button>
       {error && <div className="text-red-600 text-sm mt-3 p-3 bg-red-50 rounded-lg border border-red-200">{error}</div>}
+      {detectedIngredient && (
+        <div className="text-green-600 text-sm mt-3 p-3 bg-green-50 rounded-lg border border-green-200 flex items-center">
+          <span className="mr-2">🎯</span>
+          <span className="font-semibold">Detected ingredient: {detectedIngredient}</span>
+        </div>
+      )}
     </div>
   )
 }

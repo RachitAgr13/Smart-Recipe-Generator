@@ -43,11 +43,11 @@ export async function filterRecipes(params) {
 /**
  * Generate recipes using Gemini API
  */
-export async function generateRecipes(ingredients, dietary) {
+export async function generateRecipes(params) {
   const res = await fetch(`${API_BASE}/api/generate-recipes`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ingredients, dietary }),
+    body: JSON.stringify(params),
   });
 
   if (!res.ok) throw new Error("Failed to generate recipes");

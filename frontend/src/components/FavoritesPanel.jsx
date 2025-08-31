@@ -23,9 +23,9 @@ export default function FavoritesPanel({ favorites = [], onClear }) {
           return (
             <div
               key={idx}
-              className="p-5 border rounded-xl shadow bg-white hover:shadow-xl transition cursor-pointer"
+              className="p-5 border rounded-xl shadow bg-white hover:shadow-xl hover:scale-[1.03] hover:border-blue-200 transition-all duration-200 cursor-pointer mb-2"
             >
-              <h3 className="text-lg font-bold text-gray-700 mb-1">
+              <h3 className="text-lg font-extrabold text-gray-700 mb-2">
                 {recipe.name || recipe.title || `Recipe ${idx + 1}`}
               </h3>
 
@@ -50,7 +50,7 @@ export default function FavoritesPanel({ favorites = [], onClear }) {
               {/* Toggle Steps */}
               <button
                 onClick={() => setExpanded((prev) => ({ ...prev, [idx]: !isExpanded }))}
-                className="mt-2 px-3 py-1 text-sm rounded bg-blue-600 text-white hover:bg-blue-700 transition"
+                className="mt-2 px-3 py-1 text-sm rounded bg-blue-600 text-white hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-300"
               >
                 {isExpanded ? "Hide Steps" : "Show Steps"}
               </button>

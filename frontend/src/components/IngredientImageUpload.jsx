@@ -41,12 +41,12 @@ export default function IngredientImageUpload({ onDetected }) {
 
   return (
     <div className="mb-6 p-5 border rounded-2xl bg-gray-50 shadow-lg flex flex-col gap-2">
-      <h3 className="font-bold mb-2 text-lg text-gray-800">Upload Ingredient Image</h3>
-      <input type="file" accept="image/*" onChange={handleChange} className="mb-2" />
+      <h3 className="font-extrabold mb-2 text-lg text-gray-800">Upload Ingredient Image</h3>
+      <input type="file" accept="image/*" onChange={handleChange} className="mb-2 focus:outline-none focus:ring-2 focus:ring-blue-300 transition" />
       <button
         onClick={handleDetect}
         disabled={loading}
-        className="px-5 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 font-semibold shadow transition"
+        className="px-6 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 font-bold shadow transition focus:outline-none focus:ring-2 focus:ring-blue-300"
       >
         {loading ? 'Detecting...' : 'Detect Ingredient'}
       </button>

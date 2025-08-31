@@ -9,13 +9,13 @@ export default function FilterPanel({ onFilter = () => {} }) {
   };
 
   return (
-    <div className="p-4 border rounded">
-      <h3 className="font-semibold mb-2">Filter Recipes</h3>
+    <div className="p-5 border rounded-2xl bg-gray-50 shadow-lg flex flex-col gap-2">
+      <h3 className="font-bold mb-2 text-lg text-gray-800">Filter Recipes</h3>
       <label className="block text-sm mb-1">Difficulty</label>
       <select
         value={difficulty}
         onChange={(e) => setDifficulty(e.target.value)}
-        className="w-full border rounded px-2 py-1 mb-2"
+        className="w-full border rounded px-2 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-200"
       >
         <option value="">Any</option>
         <option value="Easy">Easy</option>
@@ -29,12 +29,12 @@ export default function FilterPanel({ onFilter = () => {} }) {
         min="0"
         value={maxTime}
         onChange={(e) => setMaxTime(e.target.value)}
-        className="w-full border rounded px-2 py-1 mb-2"
+        className="w-full border rounded px-2 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-200"
       />
 
       <button
         onClick={apply}
-        className="px-4 py-1 bg-black text-white rounded"
+        className="px-5 py-2 bg-blue-600 text-white rounded-lg font-semibold shadow hover:bg-blue-700 transition"
       >
         Apply
       </button>

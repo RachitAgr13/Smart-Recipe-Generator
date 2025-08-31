@@ -12,18 +12,18 @@ export default function IngredientInput({ onSubmitIngredients = () => {} }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 border rounded">
-      <h3 className="font-semibold mb-2">Enter Ingredients</h3>
+    <form onSubmit={handleSubmit} className="p-5 border rounded-2xl bg-gray-50 shadow-lg flex flex-col gap-2">
+      <h3 className="font-bold text-lg mb-2 text-gray-800">Enter Ingredients</h3>
       <input
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="e.g. tomato, onion, garlic"
-        className="w-full px-2 py-1 border rounded"
+        className="w-full px-3 py-2 border rounded mb-2 focus:outline-none focus:ring-2 focus:ring-blue-200"
       />
       <button
         type="submit"
-        className="mt-2 px-4 py-1 bg-black text-white rounded"
+        className="mt-2 px-5 py-2 bg-green-600 text-white rounded-lg font-semibold shadow hover:bg-green-700 transition"
       >
         Add
       </button>

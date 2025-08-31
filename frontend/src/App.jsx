@@ -134,143 +134,139 @@ export default function App() {
   }, [ratings, localRecipes])
 
   return (
-    <div className="max-w-6xl mx-auto p-4 sm:p-6">
-      <header className="mb-6">
-        <h1 className="text-2xl sm:text-3xl font-bold">Smart Recipe Generator</h1>
-        <p className="text-gray-600">
-          Enter ingredients, upload images, and let AI suggest recipes.
-        </p>
-      </header>
+    <div className="min-h-screen bg-gray-100">
+      <div className="max-w-6xl mx-auto p-4 sm:p-8 bg-white rounded-2xl shadow-xl border border-gray-200 mt-8 mb-8">
+        <header className="mb-8 border-b pb-4">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight mb-1">Smart Recipe Generator</h1>
+          <p className="text-gray-500 text-lg">Enter ingredients, upload images, and let AI suggest recipes.</p>
+        </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <IngredientInput onSubmitIngredients={onSubmitIngredients} />
-        <PreferencesPanel
-          preferences={preferences}
-          setPreferences={setPreferences}
-          servings={servings}
-          setServings={setServings}
-        />
-        <FilterPanel onFilter={doFilter} />
-      </div>
-
-      <IngredientImageUpload onDetected={handleDetectedIngredient} /> {/* 🔹 NEW */}
-
-      {ingredients.length > 0 && (
-        <div className="mb-4 text-sm text-gray-700">
-          <b>Ingredients:</b> {ingredients.join(', ')}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <IngredientInput onSubmitIngredients={onSubmitIngredients} />
+          <PreferencesPanel
+            preferences={preferences}
+            setPreferences={setPreferences}
+            servings={servings}
+            setServings={setServings}
+          />
+          <FilterPanel onFilter={doFilter} />
         </div>
-      )}
 
-      <div className="flex gap-2 mb-6 items-center">
-        <button
-          onClick={askAI}
-          className="px-4 py-2 rounded bg-black text-white hover:bg-gray-800 transition"
-        >
-          Generate Recipes
-        </button>
-        {loading && <div className="spinner" />}
-        {error && <div className="text-red-600 text-sm">{error}</div>}
-      </div>
+        <IngredientImageUpload onDetected={handleDetectedIngredient} />
 
-      {toast && (
-        <div className="fixed bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg">
-          {toast}
+        {ingredients.length > 0 && (
+          <div className="mb-4 text-base text-gray-700">
+            <b>Ingredients:</b> {ingredients.join(', ')}
+          </div>
+        )}
+
+        <div className="flex gap-3 mb-8 items-center">
+          <button
+            onClick={askAI}
+            className="px-6 py-2 rounded-lg bg-black text-white hover:bg-gray-800 transition font-semibold shadow"
+          >
+            Generate Recipes
+          </button>
+          {loading && <div className="spinner" />}
+          {error && <div className="text-red-600 text-base">{error}</div>}
         </div>
-      )}
 
-      {/* === AI Recipes (text ingredients) === */}
-      {aiRecipes.length > 0 && (
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-3">AI Recipes</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {aiRecipes.map((r, i) => (
+        {toast && (
+          <div className="fixed bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg">
+            {toast}
+          </div>
+        )}
+
+        {/* === AI Recipes (text ingredients) === */}
+        {aiRecipes.length > 0 && (
+          <section className="mb-10">
+            <h2 className="text-2xl font-semibold mb-4 text-gray-800">AI Recipes</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {aiRecipes.map((r, i) => (
+                <RecipeCard
+                  key={i}
+                  recipe={r}
+                  servings={servings}
+                  onToggleFav={() => toggleFav(r.title || r.name)}
+                  isFav={favorites.includes(r.title || r.name)}
+                  rating={ratings[r.title || r.name] || 0}
+                  onRate={(n) => rate(r.title || r.name, n)}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* === AI Recipes (from image detection) === */}
+        {detectedRecipes.length > 0 && (
+          <section className="mb-10">
+            <h2 className="text-2xl font-semibold mb-4 text-gray-800">AI Recipes from Image</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {detectedRecipes.map((r, i) => (
+                <RecipeCard
+                  key={i}
+                  recipe={r}
+                  servings={servings}
+                  onToggleFav={() => toggleFav(r)}
+                  isFav={favorites.some((f) => f.name === r.name)}
+                  rating={ratings[r.name] || 0}
+                  onRate={(n) => rate(r.name, n)}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* === Local Recipes === */}
+        <section className="mb-10">
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="text-2xl font-semibold text-gray-800">Local Recipes</h2>
+            <span className="text-sm text-gray-500">{filteredLocal.length} items</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredLocal.map((r) => (
               <RecipeCard
-                key={i}
-                recipe={r}
+                key={r.id}
+                recipe={{
+                  ...r,
+                  title: r.name,
+                  cookTimeMinutes:
+                    parseInt(String(r.cookTime).replace(/[^0-9]/g, '') ) || 0
+                }}
                 servings={servings}
-                onToggleFav={() => toggleFav(r.title || r.name)}
-                isFav={favorites.includes(r.title || r.name)}
-                rating={ratings[r.title || r.name] || 0}
-                onRate={(n) => rate(r.title || r.name, n)}
+                onToggleFav={() => toggleFav(r)}
+                isFav={favorites.some((f) => f.name === r.name)}
+                rating={ratings[r.name] || 0}
+                onRate={(n) => rate(r.name, n)}
               />
             ))}
           </div>
         </section>
-      )}
 
-      {/* === AI Recipes (from image detection) === */}
-      {detectedRecipes.length > 0 && (
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-3">AI Recipes from Image</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {detectedRecipes.map((r, i) => (
-              <RecipeCard
-  key={i}
-  recipe={r}
-  servings={servings}
-  onToggleFav={() => toggleFav(r)}
-  isFav={favorites.some((f) => f.name === r.name)}
-  rating={ratings[r.name] || 0}
-  onRate={(n) => rate(r.name, n)}
-/>
+        <FavoritesPanel favorites={favorites} onClear={() => setFavorites([])} />
 
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* === Local Recipes === */}
-      <section className="mb-8">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold mb-3">Local Recipes</h2>
-          <span className="text-sm text-gray-500">
-            {filteredLocal.length} items
-          </span>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredLocal.map((r) => (
-            <RecipeCard
-  key={r.id}
-  recipe={{
-    ...r,
-    title: r.name,
-    cookTimeMinutes:
-      parseInt(String(r.cookTime).replace(/[^0-9]/g, '')) || 0
-  }}
-  servings={servings}
-  onToggleFav={() => toggleFav(r)}
-  isFav={favorites.some((f) => f.name === r.name)}
-  rating={ratings[r.name] || 0}
-  onRate={(n) => rate(r.name, n)}
-/>
-
-          ))}
-        </div>
-      </section>
-
-      <FavoritesPanel favorites={favorites} onClear={() => setFavorites([])} />
-
-      {suggestedByRatings.length > 0 && (
-        <section className="mt-8">
-          <h2 className="text-xl font-semibold mb-3">
-            Suggestions (based on your ratings)
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {suggestedByRatings.map((r) => (
-              <div key={r.id} className="bg-white rounded-xl shadow p-4">
-                <div className="font-semibold">{r.name}</div>
-                <div className="text-sm text-gray-600">
-                  Time: {r.cookTime} • {r.difficulty}
+        {suggestedByRatings.length > 0 && (
+          <section className="mt-10">
+            <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+              Suggestions (based on your ratings)
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {suggestedByRatings.map((r) => (
+                <div key={r.id} className="bg-white rounded-xl shadow p-4">
+                  <div className="font-semibold">{r.name}</div>
+                  <div className="text-sm text-gray-600">
+                    Time: {r.cookTime} • {r.difficulty}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+              ))}
+            </div>
+          </section>
+        )}
 
-      <footer className="mt-10 text-xs text-gray-500">
-        Built with React + Vite • Tailwind • Node + Express • Gemini
-      </footer>
+        <footer className="mt-12 pt-6 border-t text-center text-xs text-gray-400">
+          Built with <span className="font-semibold text-gray-600">React + Vite</span> • Tailwind • Node + Express • Gemini
+        </footer>
+      </div>
     </div>
   )
 }

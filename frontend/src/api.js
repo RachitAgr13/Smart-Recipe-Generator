@@ -28,10 +28,16 @@ export async function getAllRecipes() {
 }
 
 /**
- * Filter recipes (currently just returns all)
+ * Filter recipes (calls backend filter endpoint)
  */
 export async function filterRecipes(params) {
-  return getAllRecipes();
+  const res = await fetch(`${API_BASE}/api/filter`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(params),
+  });
+  if (!res.ok) throw new Error("Failed to filter recipes");
+  return res.json();
 }
 
 /**

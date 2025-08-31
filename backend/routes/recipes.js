@@ -126,6 +126,44 @@ router.get("/recipes/:id", async (req, res) => {
   }
 });
 
+// Filter recipes by difficulty, dietary, maxTime
+router.post("/filter", async (req, res) => {
+  try {
+    const { difficulty, dietary, maxTime } = req.body;
+    let recipes = await readRecipes();
+
+    if (difficulty) {
+      recipes = recipes.filter(r =>
+        r.difficulty && r.difficulty.toLowerCase() === String(difficulty).toLowerCase()
+      );
+    }
+    if (dietary && dietary.length > 0) {
+      recipes = recipes.filter(r =>
+        Array.isArray(r.dietary) && dietary.every(d =>
+          r.dietary.map(x => x.toLowerCase()).includes(d.toLowerCase())
+        )
+      );
+    }
+    if (maxTime) {
+      recipes = recipes.filter(r => {
+        // Try to extract minutes from cookTime string
+        let min = 0;
+        if (typeof r.cookTime === 'string') {
+          const match = r.cookTime.match(/(\d+)/);
+          if (match) min = parseInt(match[1]);
+        } else if (typeof r.cookTime === 'number') {
+          min = r.cookTime;
+        }
+        return min <= Number(maxTime);
+      });
+    }
+    res.json(recipes);
+  } catch (err) {
+    console.error("❌ Error filtering recipes:", err.message);
+    res.status(500).json({ error: "Failed to filter recipes" });
+  }
+});
+
 // --- Gemini Recipe Generation ---
 async function handleGenerate(req, res) {
   console.log("🔥 Hit generate with body:", req.body);
